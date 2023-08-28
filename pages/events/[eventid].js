@@ -5,12 +5,8 @@ import EventSummary from '../../components/event-detail/EventSummary';
 import EventLogistics from '../../components/event-detail/EventLogistics';
 import ErrorAlert from '../../components/events/error-alert';
 
-export default function EventDetailPage() {
-  const router = useRouter();
-  const { eventid } = router.query;
-  const event = getEventById(eventid);
-
-  if (!event) {
+export default function EventDetailPage({ events }) {
+  if (!events) {
     return (
       <ErrorAlert>
         <p>No event found!</p>
@@ -20,14 +16,25 @@ export default function EventDetailPage() {
 
   return (
     <>
-      <EventSummary title={event.title} />
+      <EventSummary title={events.title} />
       <EventLogistics
-        date={event.date}
-        address={event.location}
-        image={event.image}
-        imageAlt={`Details for ${event.title}`}
+        date={events.date}
+        address={events.location}
+        image={events.image}
+        imageAlt={`Details for ${events.title}`}
       />
-      <EventContent>{event.description}</EventContent>
+      <EventContent>{events.description}</EventContent>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+
+  const res = await fetch(
+    `https://nextproject-a0863-default-rtdb.firebaseio.com/events/${params.eventid}.json`
+  );
+  const data = await res.json();
+
+  return { props: { events: data } };
 }
