@@ -1,14 +1,19 @@
-import { useRouter } from 'next/router';
-import { getFilteredEvents } from '../../dummy-data';
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/events/error-alert';
+import Head from 'next/head';
 
 export default function FilteredEvents({ events }) {
+  const date = new Date(events[0].date);
+
   if (!events || events.length === 0) {
     return (
       <>
+        <Head>
+          <title>No Events Found</title>
+          <meta name="description" content={`No events found for ${date}`} />
+        </Head>
         <ErrorAlert>
           <p>No Events Found</p>
         </ErrorAlert>
@@ -19,10 +24,12 @@ export default function FilteredEvents({ events }) {
     );
   }
 
-  const date = new Date(events[0].date);
-
   return (
     <>
+      <Head>
+        <title>Events by Date</title>
+        <meta name="description" content={`Events from ${date}`} />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={events} />
     </>

@@ -1,9 +1,8 @@
-import { useRouter } from 'next/router';
-import { getEventById } from '../../dummy-data';
 import EventContent from '../../components/event-detail/EventContent';
 import EventSummary from '../../components/event-detail/EventSummary';
 import EventLogistics from '../../components/event-detail/EventLogistics';
 import ErrorAlert from '../../components/events/error-alert';
+import Head from 'next/head';
 
 export default function EventDetailPage({ events }) {
   if (!events) {
@@ -16,6 +15,10 @@ export default function EventDetailPage({ events }) {
 
   return (
     <>
+      <Head>
+        <title>{events.title}</title>
+        <meta name="description" content={events.description} />
+      </Head>
       <EventSummary title={events.title} />
       <EventLogistics
         date={events.date}

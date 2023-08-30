@@ -1,7 +1,7 @@
-import { getAllEvents } from '../../dummy-data';
 import EventList from '../../components/events/EventList';
 import EventsSearch from '../../components/events/EventsSearch';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function AllEvents({ events }) {
   const router = useRouter();
@@ -14,6 +14,10 @@ export default function AllEvents({ events }) {
 
   return (
     <>
+      <Head>
+        <title>All Events</title>
+        <meta name="description" content="All networking events" />
+      </Head>
       <EventsSearch onSearch={findEventsHandler} />
       <EventList items={events} />
     </>

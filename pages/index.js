@@ -1,8 +1,13 @@
 import EventList from '../components/events/EventList';
+import Head from 'next/head';
 
 export default function HomePage({ events }) {
   return (
     <div>
+      <Head>
+        <title>Networking Events</title>
+        <meta name='description' content='Find events to network with like minded individuals.'/>
+      </Head>
       <EventList items={events} />
     </div>
   );
