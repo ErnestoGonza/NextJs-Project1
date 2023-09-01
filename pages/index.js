@@ -1,5 +1,6 @@
 import EventList from '../components/events/EventList';
 import Head from 'next/head';
+import NewsletterRegistration from '../components/input/newsletter-registration';
 
 export default function HomePage({ events }) {
   return (
@@ -8,6 +9,7 @@ export default function HomePage({ events }) {
         <title>Networking Events</title>
         <meta name='description' content='Find events to network with like minded individuals.'/>
       </Head>
+      <NewsletterRegistration />
       <EventList items={events} />
     </div>
   );

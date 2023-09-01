@@ -3,6 +3,7 @@ import EventSummary from '../../components/event-detail/EventSummary';
 import EventLogistics from '../../components/event-detail/EventLogistics';
 import ErrorAlert from '../../components/events/error-alert';
 import Head from 'next/head';
+import Comments from '../../components/input/comments';
 
 export default function EventDetailPage({ events }) {
   if (!events) {
@@ -27,6 +28,7 @@ export default function EventDetailPage({ events }) {
         imageAlt={`Details for ${events.title}`}
       />
       <EventContent>{events.description}</EventContent>
+      <Comments eventId={events.id} />
     </>
   );
 }
