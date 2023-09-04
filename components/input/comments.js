@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import CommentList from './comment-list';
 import NewComment from './new-comment';
 import classes from './comments.module.css';
@@ -18,7 +17,7 @@ function Comments(props) {
           setComments(data.comments);
         });
     }
-  }, [showComments]);
+  }, [showComments, comments]);
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
@@ -33,7 +32,9 @@ function Comments(props) {
       },
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setComments((prev) => [...prev, data.comment]);
+      });
   }
 
   return (

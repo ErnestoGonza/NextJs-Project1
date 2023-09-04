@@ -4,8 +4,14 @@ import EventLogistics from '../../components/event-detail/EventLogistics';
 import ErrorAlert from '../../components/events/error-alert';
 import Head from 'next/head';
 import Comments from '../../components/input/comments';
+import { useRouter } from 'next/router';
 
-export default function EventDetailPage({ events }) {
+export default function EventDetailPage(props) {
+  const { events } = props;
+  const router = useRouter();
+
+  const eventId = router.query.eventid;
+
   if (!events) {
     return (
       <ErrorAlert>
@@ -28,7 +34,7 @@ export default function EventDetailPage({ events }) {
         imageAlt={`Details for ${events.title}`}
       />
       <EventContent>{events.description}</EventContent>
-      <Comments eventId={events.id} />
+      <Comments eventId={eventId} />
     </>
   );
 }

@@ -8,17 +8,17 @@ function NewsletterRegistration() {
   function registrationHandler(event) {
     event.preventDefault();
 
-    const enteredEmail = emailInputRef.current.value;
+    const data = {
+      email: emailInputRef.current.value,
+    };
 
     fetch('/api/newsletter', {
       method: 'POST',
-      body: JSON.stringify({ email: enteredEmail }),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    });
   }
 
   return (
@@ -27,10 +27,10 @@ function NewsletterRegistration() {
       <form onSubmit={registrationHandler}>
         <div className={classes.control}>
           <input
-            type='email'
-            id='email'
-            placeholder='Your email'
-            aria-label='Your email'
+            type="email"
+            id="email"
+            placeholder="Your email"
+            aria-label="Your email"
             ref={emailInputRef}
           />
           <button>Register</button>
