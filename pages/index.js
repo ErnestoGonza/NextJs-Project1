@@ -1,15 +1,27 @@
 import EventList from '../components/events/EventList';
 import Head from 'next/head';
 import NewsletterRegistration from '../components/input/newsletter-registration';
+import { useState } from 'react';
 
 export default function HomePage({ events }) {
+  const [clearNewsletter, setClearNewsletter] = useState(false);
+
   return (
     <div>
       <Head>
         <title>Networking Events</title>
-        <meta name='description' content='Find events to network with like minded individuals.'/>
+        <meta
+          name="description"
+          content="Find events to network with like minded individuals."
+        />
       </Head>
-      <NewsletterRegistration />
+      {!clearNewsletter ? (
+        <NewsletterRegistration clearNewsletter={setClearNewsletter} />
+      ) : (
+        <h2 style={{ display: 'flex', justifyContent: 'center' }}>
+          You've signed up!
+        </h2>
+      )}
       <EventList items={events} />
     </div>
   );

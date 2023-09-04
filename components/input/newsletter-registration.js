@@ -1,8 +1,7 @@
 import { useRef } from 'react';
-
 import classes from './newsletter-registration.module.css';
 
-function NewsletterRegistration() {
+function NewsletterRegistration({ clearNewsletter }) {
   const emailInputRef = useRef();
 
   function registrationHandler(event) {
@@ -19,6 +18,9 @@ function NewsletterRegistration() {
         'Content-Type': 'application/json',
       },
     });
+
+    emailInputRef.current.value = '';
+    clearNewsletter(true);
   }
 
   return (
