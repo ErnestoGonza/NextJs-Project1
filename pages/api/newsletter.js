@@ -2,6 +2,7 @@ import { MongoClient } from 'mongodb';
 
 async function handler(req, res) {
   let client;
+  let connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.password}@${process.env.clustername}.l74ygga.mongodb.net/${process.env.newsletter}?retryWrites=true&w=majority`;
 
   if (req.method === 'POST') {
     const userEmail = req.body.email;
@@ -11,9 +12,7 @@ async function handler(req, res) {
     }
 
     try {
-      client = await MongoClient.connect(
-        'mongodb+srv://egonzalez442:QFBYPZivRrviFQTI@cluster0.l74ygga.mongodb.net/newsletter?retryWrites=true&w=majority'
-      );
+      client = await MongoClient.connect(connectionString);
     } catch (err) {
       return res
         .status(500)
